@@ -3,11 +3,11 @@ import qs from "query-string";
 
 const URL = `${process.env.NEXT_PUBLIC_API_URL}/products`
 
-const getProductsByCategory = async (categoryId: string): Promise<Product[]> => {
+const getProductsBySubcategory = async (subcategoryId: string): Promise<Product[]> => {
     const url = qs.stringifyUrl({
       url: URL,
       query: {
-        categoryId,
+        subcategoryId,
       }
     });
   
@@ -28,4 +28,4 @@ const getProductsByCategory = async (categoryId: string): Promise<Product[]> => 
     return formattedProducts;
   }
   
-  export default getProductsByCategory;
+  export default getProductsBySubcategory;

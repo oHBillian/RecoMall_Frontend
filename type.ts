@@ -14,9 +14,12 @@ export interface Product {
     name: string,
     description: string;
     price: string;
+    categoryname : string,
     categoryId: number;
     subcategoryId: number;
-    images: Image[];
+    Images: Image[];
+    category: Category;
+    subcategory: SubCategory
 }
 
 

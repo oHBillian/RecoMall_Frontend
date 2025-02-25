@@ -21,20 +21,12 @@ const Sidebar = async ({ categoryId }: SidebarProps) => {
 
 
   return (
-    <div className="h-full w-60 flex flex-col p-10 border-r">
+    <div className="h-full w-64 flex flex-col p-10 border-r">
       <p className="text-black font-medium text-xl">Categories</p>
       <div className="border mt-2"></div>
-      <div className="mt-2 flex gap-2">
+      <div className="mt-2 flex flex-col gap-y-3 ">
         <SidebarItems data={formattedsubcategories}/>
       </div>
-      {/* <div className="bg-[#3A3B3D] mt-auto flex items-center justify-around h-16 p-2">
-        <UserButton />
-        {user && (
-          <span className="text-sm font-medium text-white">
-            {user.primaryEmailAddress?.emailAddress}
-          </span>
-        )}
-      </div> */}
     </div>
   );
 };

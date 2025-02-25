@@ -1,13 +1,15 @@
-import GetProducts from "@/actions/get-Product";
+"use client"
+import PaginationTab from "@/components/paginationtab";
 import ProductList from "@/components/productlist";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-export default async function Home() {
-  const products = await GetProducts();
+import { useState } from "react";
 
+export default function Home() {
+  const [searchvalue,setSearchvalue] = useState("");
   return (
     <>
-      <div className="h-full">
+      <div className="h-fit pb-5">
         <div className="w-full mt-2 flex justify-center md:px-32 h-96 ">
           <div
             className="rounded-3xl w-full bg-red-200 h-full flex justify-start items-center pl-20 pr-20"
@@ -30,18 +32,23 @@ export default async function Home() {
                 <Search size={25} />
                 <Input
                   type="text"
+                  value={searchvalue}
                   placeholder="Search..."
                   className="bg-white border-none"
+                  onChange={e => setSearchvalue(e.target.value)}
                 />
-                <button className="ml-2 mr-2 px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors duration-300">
+                <button className="ml-2 mr-2 px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors duration-300" onClick={() => {console.log(searchvalue)}}>
                   Search
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex h-2/3">
-          <ProductList data={products} />
+        <div className="flex h-2/3 px-24">
+          <ProductList />
+        </div>
+        <div className="w-full flex justify-center pt-5 pb-4 h-10 items-center">
+          <PaginationTab />
         </div>
       </div>
     </>

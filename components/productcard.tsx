@@ -1,32 +1,37 @@
 import Image from "next/image";
 import React from "react";
-import { Button } from "./ui/button";
-import { ShoppingCart } from "lucide-react";
-import GetMaincategories from "@/actions/get-Maincategories";
 import { Product } from "@/type";
 import Link from "next/link";
+import Productbutton from "./productbutton";
 interface Productcardprops {
-    product: Product;
-    categoryID: number
+  product: Product;
 }
 
-const Productcard:React.FC<Productcardprops> = async ({product,categoryID}) => {
-    const categoryName = await GetMaincategories(categoryID.toString());
+const Productcard: React.FC<Productcardprops> = ({
+  product,
+}) => {
+  // console.log("ก่อนจะ format",product)
+  const fommattedproduct = {
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    image: product.images[0],
+  }
 
   return (
-    <Link href={`/product/${product.id}`}>
-    <div
-      className="border rounded-lg shadow-sm hover:shadow-md p-4 space-y-3 transition-all duration-300"
-    >
+    // <Link href={`/product/${product.id}`}>
+    <div className="border rounded-lg shadow-sm hover:shadow-md p-4 space-y-3 transition-all duration-300">
       {/* Image Container */}
-      <div className="relative h-48 w-full">
-        <Image
-          src={product.images[0]}
-          alt={product.name}
-          width={200}
-          height={200}
-          className="object-contain h-full"
-        />
+      <div className="relative h-48 w-full flex justify-center items-center">
+        <Link href={`/product/${product.id}`}>
+          <Image
+            src={product.images?.[0] || "/placeholder.jpg"}
+            alt={product.name}
+            width={200}
+            height={200}
+            className="object-contain h-full "
+          />
+        </Link>
       </div>
 
       {/* Product Info Container */}
@@ -36,7 +41,7 @@ const Productcard:React.FC<Productcardprops> = async ({product,categoryID}) => {
 
         {/* Category Info */}
         <div className="text-sm bg-gray-200 font-medium space-y-1 border w-fit px-2 rounded-md shadow-sm">
-          <p>{categoryName[0]?.name}</p>
+          <p>{product.categoryname}</p>
         </div>
 
         {/* Price */}
@@ -48,17 +53,11 @@ const Productcard:React.FC<Productcardprops> = async ({product,categoryID}) => {
           })}
         </p>
 
-        <div className="flex justify-between items-center gap-x-2 text-sm">
-          <Button variant="outline" size="sm" className="w-full">
-            Details
-          </Button>
-          <Button size="sm" className="w-full">
-            <ShoppingCart /> Add
-          </Button>
+        <div className="">
+          <Productbutton productId={product.id} cartvalue={fommattedproduct}/>
         </div>
       </div>
     </div>
-    </Link>
   );
 };
 

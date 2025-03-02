@@ -21,7 +21,7 @@ const Sidebar = async ({ categoryId }: SidebarProps) => {
 
 
   return (
-    <div className="h-full w-64 flex flex-col p-10 border-r">
+    <div className="max-h-full w-64 flex flex-col p-10 border-r" >
       <p className="text-black font-medium text-xl">Categories</p>
       <div className="border mt-2"></div>
       <div className="mt-2 flex flex-col gap-y-3 ">
